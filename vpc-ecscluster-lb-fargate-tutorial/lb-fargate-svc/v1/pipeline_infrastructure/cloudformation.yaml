@@ -607,7 +607,7 @@ Resources:
 #               Name: Approval
 #               RunOrder: 1
 #           Name: Preproduction_Approval
-{% endif %}
+# {% endif %}
         - Actions: # TODO: Add a manual approval step for all Prod environments before this action
             - ActionTypeId:
                 Category: Build
