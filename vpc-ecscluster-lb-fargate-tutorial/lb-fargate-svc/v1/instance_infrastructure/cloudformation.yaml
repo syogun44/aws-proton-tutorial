@@ -306,6 +306,28 @@ Resources:
       LoadBalancerArn: !Ref 'PublicLoadBalancer'
       Port: 80
       Protocol: HTTP
+  #  For ESC Exce
+  ECSTaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+        AssumeRolePolicyDocument:
+            Statement:
+            - Effect: Allow
+              Principal:
+                  Service: [ecs-tasks.amazonaws.com]
+              Action: ['sts:AssumeRole']
+        Path: /
+        Policies:
+            - PolicyName: SSMMessagesPolicy
+              PolicyDocument:
+                Statement:
+                    - Effect: Allow
+                      Action:
+                        - 'ssmmessages:CreateControlChannel'
+                        - 'ssmmessages:CreateDataChannel'
+                        - 'ssmmessages:OpenControlChannel'
+                        - 'ssmmessages:OpenDataChannel'
+                      Resource: '*'
 Outputs:
   ServiceEndpoint:
     Description: The URL to access the service

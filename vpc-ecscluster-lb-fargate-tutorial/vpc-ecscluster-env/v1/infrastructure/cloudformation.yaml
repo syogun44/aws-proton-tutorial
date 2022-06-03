@@ -129,28 +129,6 @@ Resources:
       Path: /
       ManagedPolicyArns:
         - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
-  #  For ESC Exce
-  ECSTaskRole:
-    Type: AWS::IAM::Role
-    Properties:
-        AssumeRolePolicyDocument:
-            Statement:
-            - Effect: Allow
-              Principal:
-                  Service: [ecs-tasks.amazonaws.com]
-              Action: ['sts:AssumeRole']
-        Path: /
-        Policies:
-            - PolicyName: SSMMessagesPolicy
-              PolicyDocument:
-                Statement:
-                    - Effect: Allow
-                      Action:
-                        - 'ssmmessages:CreateControlChannel'
-                        - 'ssmmessages:CreateDataChannel'
-                        - 'ssmmessages:OpenControlChannel'
-                        - 'ssmmessages:OpenDataChannel'
-                      Resource: '*'
 
 # These output values will be available to service templates to use.
 Outputs:
