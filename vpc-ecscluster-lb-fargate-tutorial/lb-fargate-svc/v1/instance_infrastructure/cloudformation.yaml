@@ -36,7 +36,7 @@ Resources:
       RequiresCompatibilities:
         - FARGATE
       ExecutionRoleArn: '{{environment.outputs.ECSTaskExecutionRole}}'
-      TaskRoleArn: !Ref "AWS::NoValue"
+      TaskRoleArn: !Ref 'ECSTaskRole'
       ContainerDefinitions:
         - Name: '{{service_instance.name}}'
           Environment:
@@ -60,6 +60,9 @@ Resources:
     Type: AWS::ECS::Service
     DependsOn: LoadBalancerRule
     Properties:
+      {% if 'VPC-ECSCluster-Env-Test' in environment.name %} 
+      EnableExecuteCommand: true 
+      {% endif %} 
       ServiceName: '{{service.name}}_{{service_instance.name}}'
       Cluster: '{{environment.outputs.ClusterName}}'
       LaunchType: FARGATE
